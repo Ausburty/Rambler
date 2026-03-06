@@ -106,15 +106,13 @@
   }
   .masthead-right a { color: var(--accent); text-decoration: none; font-size: 9px; letter-spacing: 0.2em; }
 
-  /* NAV — mirrors hero's 1fr 1px 1fr grid so column lines align */
+  /* NAV */
   nav {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
     border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
   }
-  .nav-left { display: flex; align-items: stretch; justify-content: center; }
-  .nav-divider { background: var(--rule); }
-  .nav-right { display: flex; align-items: stretch; justify-content: center; }
   nav a {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -125,13 +123,11 @@
     padding: 13px 22px;
     display: flex;
     align-items: center;
+    border-left: 1px solid var(--rule);
     transition: background 0.2s, color 0.2s;
     white-space: nowrap;
   }
-  .nav-left a { border-right: 1px solid var(--rule); }
-  .nav-left a:first-child { border-left: 1px solid var(--rule); }
-  .nav-right a { border-right: 1px solid var(--rule); }
-  .nav-right a:first-child { border-left: 1px solid var(--rule); }
+  nav a:last-child { border-right: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
   nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
   nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
@@ -501,16 +497,11 @@
   </div>
 
   <nav>
-    <div class="nav-left">
-      <a href="/#episodes">Episodes</a>
-      <a href="/#media-club">Media Club</a>
-    </div>
-    <div class="nav-divider"></div>
-    <div class="nav-right">
-      <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
-      <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
-      <a href="https://ramblermediaclub.substack.com" target="_blank" class="cta">Subscribe Free →</a>
-    </div>
+    <a href="/#episodes">Episodes</a>
+    <a href="/#media-club">Media Club</a>
+    <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
+    <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
+    <a href="https://ramblermediaclub.substack.com" target="_blank" class="cta">Subscribe Free →</a>
   </nav>
 </header>
 
