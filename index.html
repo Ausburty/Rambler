@@ -12,7 +12,6 @@
     --paper: #f4f0e8;
     --paper-dark: #e8e2d4;
     --accent: #c8371a;
-    --accent-muted: #e8c4bc;
     --rule: #1a1714;
     --mid: #6b6560;
   }
@@ -39,30 +38,27 @@
   }
 
   /* MASTHEAD */
-  .masthead { border-bottom: 3px double var(--rule); }
+  .masthead { border-bottom: 1px solid var(--rule); }
 
-.masthead-top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 10px 40px;
-  border-bottom: 1px solid var(--rule);
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-
-.masthead-top-right {
-  text-align: right;
-}
+  .masthead-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 10px 40px;
+    border-bottom: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .masthead-top-right { text-align: right; }
 
   .masthead-main {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 24px 40px;
+    padding: 28px 40px;
     gap: 32px;
   }
 
@@ -113,13 +109,13 @@
   .masthead-right strong { color: var(--ink); font-weight: 400; display: block; }
   .masthead-right a { color: var(--accent); text-decoration: none; font-size: 9px; letter-spacing: 0.2em; }
 
+  /* NAV */
   nav {
     border-top: 1px solid var(--rule);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
-
   nav a {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -127,9 +123,10 @@
     text-transform: uppercase;
     text-decoration: none;
     color: var(--ink);
-    padding: 13px 26px;
+    padding: 13px 22px;
     border-right: 1px solid var(--rule);
     transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
   }
   nav a:first-child { border-left: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
@@ -139,9 +136,9 @@
   /* HERO */
   .hero {
     display: grid;
-    grid-template-columns: 1fr 2px 1fr;
-    border-bottom: 2px solid var(--rule);
-    min-height: 320px;
+    grid-template-columns: 1fr 1px 1fr;
+    border-bottom: 1px solid var(--rule);
+    min-height: 300px;
   }
   .hero-divider { background: var(--rule); }
 
@@ -194,7 +191,7 @@
     text-transform: uppercase;
     text-decoration: none;
     padding: 13px 22px;
-    border: 1.5px solid var(--ink);
+    border: 1px solid var(--ink);
     color: var(--ink);
     background: transparent;
     transition: all 0.2s;
@@ -242,7 +239,7 @@
   .content-grid {
     display: grid;
     grid-template-columns: 2fr 1px 1fr;
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
   .col-divider { background: var(--rule); }
   .episodes-col { padding: 44px 40px; }
@@ -256,17 +253,13 @@
     text-transform: uppercase;
     color: var(--mid);
     padding-bottom: 14px;
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
     margin-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
   }
-  .col-header-note {
-    font-size: 9px;
-    color: var(--mid);
-    letter-spacing: 0.1em;
-  }
+  .col-header-note { font-size: 9px; color: var(--mid); letter-spacing: 0.1em; }
 
   /* EPISODES */
   .episode-item {
@@ -290,7 +283,6 @@
     padding-top: 2px;
     letter-spacing: 0.05em;
   }
-
   .ep-title {
     font-family: 'Playfair Display', serif;
     font-size: 16px;
@@ -298,13 +290,7 @@
     line-height: 1.3;
     margin-bottom: 6px;
   }
-
-  .ep-desc {
-    font-size: 12px;
-    color: var(--mid);
-    line-height: 1.55;
-  }
-
+  .ep-desc { font-size: 12px; color: var(--mid); line-height: 1.55; }
   .ep-meta {
     font-family: 'DM Mono', monospace;
     font-size: 9px;
@@ -339,7 +325,7 @@
     text-transform: uppercase;
     color: var(--mid);
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
     margin-bottom: 16px;
   }
 
@@ -419,7 +405,7 @@
     color: var(--paper);
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
   .sub-divider { background: rgba(244,240,232,0.12); }
 
@@ -465,7 +451,7 @@
     text-transform: uppercase;
     text-decoration: none;
     padding: 14px 18px;
-    border: 1.5px solid rgba(244,240,232,0.2);
+    border: 1px solid rgba(244,240,232,0.2);
     color: var(--paper);
     transition: all 0.15s;
   }
@@ -488,14 +474,12 @@
     background-size: cover;
     background-position: center;
   }
-
   footer::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(26,23,20,0.7) 0%, rgba(26,23,20,0.88) 100%);
   }
-
   footer > * { position: relative; z-index: 1; }
 
   .footer-title {
@@ -507,7 +491,6 @@
     line-height: 1;
     text-align: center;
   }
-
   .footer-sub {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -516,10 +499,8 @@
     color: rgba(244,240,232,0.5);
     text-align: center;
   }
-
   .footer-links {
     display: flex;
-    gap: 0;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
@@ -538,7 +519,6 @@
   }
   .footer-links a:first-child { border-left: 1px solid rgba(244,240,232,0.15); }
   .footer-links a:hover { color: var(--paper); }
-
   .footer-copy {
     font-family: 'DM Mono', monospace;
     font-size: 9px;
@@ -557,21 +537,53 @@
 
   /* RESPONSIVE */
   @media (max-width: 820px) {
-    .masthead-top { padding: 10px 20px; }
-    .masthead-main { grid-template-columns: 1fr; text-align: center; padding: 24px 20px; gap: 16px; }
+    .masthead-top { padding: 8px 16px; font-size: 9px; letter-spacing: 0.08em; }
+    .masthead-top .masthead-top-right { display: none; }
+    .masthead-main { grid-template-columns: 1fr; text-align: center; padding: 20px 16px; gap: 12px; }
     .masthead-left, .masthead-right { display: none; }
-    nav a { padding: 11px 14px; font-size: 10px; }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    nav a {
+      padding: 12px 10px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+      border-left: none;
+      text-align: center;
+    }
+    nav a:first-child { border-left: none; }
+    nav a:nth-child(odd) { border-right: 1px solid var(--rule); }
+    nav a.cta {
+      grid-column: 1 / -1;
+      border-right: none;
+      border-bottom: none;
+    }
+
     .hero { grid-template-columns: 1fr; }
     .hero-divider { display: none; }
     .hero-panel { padding: 32px 20px; }
-    .listen-bar { padding: 0 20px; }
+    .hero-panel:first-child { border-bottom: 1px solid var(--rule); }
+
+    .listen-bar { padding: 0 16px; }
+    .listen-bar a { padding: 12px 10px; font-size: 9px; letter-spacing: 0.08em; }
+    .listen-label { display: none; }
+
     .content-grid { grid-template-columns: 1fr; }
     .col-divider { display: none; }
-    .episodes-col, .sidebar-col { padding: 32px 20px; }
+    .episodes-col { padding: 28px 20px; }
+    .sidebar-col { padding: 28px 20px; border-top: 1px solid var(--rule); }
+
     .sub-strip { grid-template-columns: 1fr; }
     .sub-divider { display: none; }
     .sub-panel { padding: 36px 24px; }
+    .sub-panel:first-child { border-bottom: 1px solid rgba(244,240,232,0.12); }
+
     footer { padding: 48px 24px 28px; }
+    .footer-links a { padding: 8px 10px; font-size: 9px; }
   }
 </style>
 </head>
@@ -579,24 +591,21 @@
 
 <!-- MASTHEAD -->
 <header class="masthead">
- <div class="masthead-top">
-  <div id="live-date"></div>
-  <div style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</div>
-  <div class="masthead-top-right">Live From the City That Never Works</div>
-</div>
-
+  <div class="masthead-top">
+    <div id="live-date"></div>
+    <div style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</div>
+    <div class="masthead-top-right">Live From the City That Never Works</div>
+  </div>
   <div class="masthead-main">
     <div class="masthead-left">
       Podcasting since 2026<br>
       <span id="ep-count-left">9 Episodes</span><br>
       Weekly · ~10 min
     </div>
-
     <div class="masthead-center">
       <h1 class="site-title">RAMBLER</h1>
       <span class="site-subtitle">Live From the City That Never Works</span>
     </div>
-
     <div class="masthead-right">
       <strong>Austin Grey</strong>
       Solo · Monologue<br>
@@ -604,7 +613,6 @@
       <a href="https://ramblermediaclub.substack.com" target="_blank">Media Club ↗</a>
     </div>
   </div>
-
   <nav>
     <a href="#episodes">Episodes</a>
     <a href="#media-club">Media Club</a>
@@ -625,9 +633,7 @@
     </div>
     <a href="#episodes" class="btn btn-accent">▶ Browse Episodes</a>
   </div>
-
   <div class="hero-divider"></div>
-
   <div class="hero-panel">
     <div>
       <div class="section-label">Rambler: Media Club</div>
@@ -657,9 +663,7 @@
     </div>
     <div id="episodes-list"><div class="loading-state">Fetching latest episodes…</div></div>
   </div>
-
   <div class="col-divider"></div>
-
   <aside class="sidebar-col" id="media-club">
     <div class="sidebar-block">
       <div class="sidebar-block-label">Rambler: Media Club</div>
@@ -668,7 +672,6 @@
         <span>All Posts on Substack</span><span>→</span>
       </a>
     </div>
-
     <div class="sidebar-block">
       <div class="sidebar-block-label">By the Numbers</div>
       <div class="stat-grid">
@@ -693,9 +696,7 @@
       <a href="https://feeds.buzzsprout.com/2569924.rss" class="sub-btn" target="_blank"><span>RSS Feed</span><span>→</span></a>
     </div>
   </div>
-
   <div class="sub-divider"></div>
-
   <div class="sub-panel">
     <div class="sub-eyebrow">Rambler: Media Club</div>
     <h2 class="sub-headline">Read the<br>show's <em>mind.</em></h2>
@@ -706,7 +707,7 @@
   </div>
 </section>
 
-<!-- FOOTER  -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-title">RAMBLER</div>
   <div class="footer-sub">Live From the City That Never Works</div>
@@ -728,97 +729,89 @@
     try { return new Date(str).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
     catch(e) { return ''; }
   }
-  function fmtDur(val) {
-    if (!val) return '';
-    if (String(val).includes(':')) return val;
-    const s = parseInt(val);
-    if (isNaN(s)) return val;
-    return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-  }
-  function stripHTML(str) {
-    return str.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'').trim();
-  }
 
-const FALLBACK_EPISODES = [
-  { num:9, id:'18714677', title:'A Couple Tips on Starting a Cult', desc:'A lot of these new era cult leaders have it all wrong. A few lessons learned from some of the larger cults.', dur:'13:03', date:'Feb 19, 2026' },
-  { num:8, id:'18640248', title:'I Love You: Ya Hunk of Junk', desc:'A love letter to my car. The hunk of junk that refuses to get rid of me. My ride or die.', dur:'10:33', date:'Feb 8, 2026' },
-  { num:7, id:'18603191', title:"Snowmageddon: Surviving Mother Earth's Cold Shoulder", desc:'How do we survive the coldest days of the winter? Sometimes friends are the most important thing we thaw along the way.', dur:'11:46', date:'Jan 31, 2026' },
-  { num:6, id:'18562777', title:'Flip a Coin: I Am Not Picking a Side', desc:'How I accidentally became "the guy with an opinion" after weighing in on the placement of an office plant.', dur:'8:43', date:'Jan 25, 2026' },
-  { num:5, id:'18525158', title:'Wedding Season: We Really Had a Good Thing Going', desc:'Weddings have the potential to be the most beautiful thing in the world. Until the performative people took over.', dur:'10:43', date:'Jan 18, 2026' },
-  { num:4, id:'18498790', title:'NYE — Who Will the Kiss Be? Oh Please Not Her', desc:"New Year's Eve and all the social landmines that come with it.", dur:'9:08', date:'Jan 12, 2026' },
-  { num:3, id:'18452593', title:'Airport Odyssey — Destination Unknown', desc:"The adventure isn't the destination. It's navigating the terminal.", dur:'9:47', date:'Jan 4, 2026' },
-  { num:2, id:'18452589', title:'Beef with the Butcher — Escaping the Grocery Store with Minimal Injuries', desc:'A complete breakdown of the modern grocery store experience.', dur:'9:54', date:'Jan 4, 2026' },
-  { num:1, id:'18452585', title:'Gym Bamboozlement — Getting Trapped in a Toxic Gym Relationship', desc:'How a gym membership becomes a personality trait you never asked for.', dur:'9:28', date:'Jan 4, 2026' },
-];
+  const FALLBACK_EPISODES = [
+    { num:9, id:'18714677', title:'A Couple Tips on Starting a Cult', desc:'A lot of these new era cult leaders have it all wrong. A few lessons learned from some of the larger cults.', dur:'13:03', date:'Feb 19, 2026' },
+    { num:8, id:'18640248', title:'I Love You: Ya Hunk of Junk', desc:'A love letter to my car. The hunk of junk that refuses to get rid of me. My ride or die.', dur:'10:33', date:'Feb 8, 2026' },
+    { num:7, id:'18603191', title:"Snowmageddon: Surviving Mother Earth's Cold Shoulder", desc:'How do we survive the coldest days of the winter? Sometimes friends are the most important thing we thaw along the way.', dur:'11:46', date:'Jan 31, 2026' },
+    { num:6, id:'18562777', title:'Flip a Coin: I Am Not Picking a Side', desc:'How I accidentally became "the guy with an opinion" after weighing in on the placement of an office plant.', dur:'8:43', date:'Jan 25, 2026' },
+    { num:5, id:'18525158', title:'Wedding Season: We Really Had a Good Thing Going', desc:'Weddings have the potential to be the most beautiful thing in the world. Until the performative people took over.', dur:'10:43', date:'Jan 18, 2026' },
+    { num:4, id:'18498790', title:'NYE — Who Will the Kiss Be? Oh Please Not Her', desc:"New Year's Eve and all the social landmines that come with it.", dur:'9:08', date:'Jan 12, 2026' },
+    { num:3, id:'18452593', title:'Airport Odyssey — Destination Unknown', desc:"The adventure isn't the destination. It's navigating the terminal.", dur:'9:47', date:'Jan 4, 2026' },
+    { num:2, id:'18452589', title:'Beef with the Butcher — Escaping the Grocery Store with Minimal Injuries', desc:'A complete breakdown of the modern grocery store experience.', dur:'9:54', date:'Jan 4, 2026' },
+    { num:1, id:'18452585', title:'Gym Bamboozlement — Getting Trapped in a Toxic Gym Relationship', desc:'How a gym membership becomes a personality trait you never asked for.', dur:'9:28', date:'Jan 4, 2026' },
+  ];
 
   const FALLBACK_POSTS = [
     { title:'Media Guide: Hunk of Junk', desc:'The songs, shows, and rabbit holes behind the car episode — including the Dave Ramsey Facebook ad that started it all.', date:'Feb 8, 2026', link:'https://ramblermediaclub.substack.com' },
   ];
 
-function renderEpisodes(eps) {
-  const c = document.getElementById('episodes-list');
-  c.innerHTML = '';
-  eps.forEach((ep, i) => {
-    const a = document.createElement('a');
-    a.className = 'episode-item';
-    a.href = `/Rambler/episodes/episode.html?id=${ep.id}`;
-    a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
-    a.innerHTML = `
-      <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
-      <div>
-        <div class="ep-title">${ep.title}</div>
-        <div class="ep-desc">${ep.desc}</div>
-      </div>
-      <div class="ep-meta">
-        <span style="display:block">${ep.dur}</span>
-        <span>${ep.date}</span>
-      </div>`;
-    c.appendChild(a);
-  });
-}
-
-function renderSubstack(posts) {
-  const c = document.getElementById('substack-list');
-  c.innerHTML = '';
-  posts.forEach(post => {
-    const a = document.createElement('a');
-    a.className = 'substack-item';
-    a.href = post.link;
-    a.target = '_blank';
-    a.innerHTML = `
-      <div class="substack-title">${post.title}</div>
-      <div class="substack-desc">${post.desc}</div>
-      <div class="substack-date">${post.date}</div>`;
-    c.appendChild(a);
-  });
-}
-
-async function loadEpisodes() {
-  try {
-    const res = await fetch('/Rambler/episodes.json');
-    const eps = await res.json();
-    document.getElementById('stat-eps').textContent = eps.length;
-    document.getElementById('ep-count-left').textContent = `${eps.length} Episodes`;
-    document.getElementById('ep-count-label').textContent = `${eps.length} episodes · live`;
-    renderEpisodes(eps);
-  } catch(e) {
-    renderEpisodes(FALLBACK_EPISODES);
-    document.getElementById('ep-count-label').textContent = '9 episodes';
+  function renderEpisodes(eps) {
+    const c = document.getElementById('episodes-list');
+    c.innerHTML = '';
+    eps.forEach((ep, i) => {
+      const a = document.createElement('a');
+      a.className = 'episode-item';
+      a.href = `./episodes/episode.html?id=${ep.id}`;
+      a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
+      a.innerHTML = `
+        <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
+        <div>
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-desc">${ep.desc}</div>
+        </div>
+        <div class="ep-meta">
+          <span style="display:block">${ep.dur}</span>
+          <span>${ep.date}</span>
+        </div>`;
+      c.appendChild(a);
+    });
   }
-}
 
-async function loadSubstack() {
-  try {
-    const res = await fetch('/Rambler/posts.json');
-    const posts = await res.json();
-    renderSubstack(posts);
-  } catch(e) {
-    renderSubstack(FALLBACK_POSTS);
+  function renderSubstack(posts) {
+    const c = document.getElementById('substack-list');
+    c.innerHTML = '';
+    posts.forEach(post => {
+      const a = document.createElement('a');
+      a.className = 'substack-item';
+      a.href = post.link;
+      a.target = '_blank';
+      a.innerHTML = `
+        <div class="substack-title">${post.title}</div>
+        <div class="substack-desc">${post.desc}</div>
+        <div class="substack-date">${post.date}</div>`;
+      c.appendChild(a);
+    });
   }
-}
 
-loadEpisodes();
-loadSubstack();
+  async function loadEpisodes() {
+    try {
+      const res = await fetch('./episodes.json');
+      if (!res.ok) throw new Error('not ok');
+      const eps = await res.json();
+      document.getElementById('stat-eps').textContent = eps.length;
+      document.getElementById('ep-count-left').textContent = `${eps.length} Episodes`;
+      document.getElementById('ep-count-label').textContent = `${eps.length} episodes · live`;
+      renderEpisodes(eps);
+    } catch(e) {
+      renderEpisodes(FALLBACK_EPISODES);
+      document.getElementById('ep-count-label').textContent = '9 episodes';
+    }
+  }
+
+  async function loadSubstack() {
+    try {
+      const res = await fetch('./posts.json');
+      if (!res.ok) throw new Error('not ok');
+      const posts = await res.json();
+      renderSubstack(posts);
+    } catch(e) {
+      renderSubstack(FALLBACK_POSTS);
+    }
+  }
+
+  loadEpisodes();
+  loadSubstack();
 </script>
 </body>
 </html>
