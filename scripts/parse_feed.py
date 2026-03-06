@@ -24,17 +24,4 @@ for i, item in enumerate(items):
 with open('episodes.json', 'w') as f:
     json.dump(episodes, f)
 
-# Substack
-req = urllib.request.Request('https://ramblermediaclub.substack.com/feed', headers={'User-Agent': 'Mozilla/5.0'})
-with urllib.request.urlopen(req) as r:
-    sub = ET.fromstring(r.read())
-posts = []
-for item in sub.findall('./channel/item')[:5]:
-    posts.append({
-        'title': item.findtext('title', '').strip(),
-        'desc': strip(item.findtext('description', ''))[:100] + '…',
-        'date': item.findtext('pubDate', ''),
-        'link': item.findtext('link', ''),
-    })
-with open('posts.json', 'w') as f:
-    json.dump(posts, f)
+
