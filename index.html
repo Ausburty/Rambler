@@ -12,6 +12,7 @@
     --paper: #f4f0e8;
     --paper-dark: #e8e2d4;
     --accent: #c8371a;
+    --accent-muted: #e8c4bc;
     --rule: #1a1714;
     --mid: #6b6560;
   }
@@ -41,10 +42,11 @@
   .masthead { border-bottom: 3px double var(--rule); }
 
   .masthead-top {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 10px 40px;
+    padding: 24px 40px;
+    gap: 32px;
     border-bottom: 1px solid var(--rule);
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -62,63 +64,54 @@
   }
 
   .masthead-left {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    line-height: 2;
     animation: fadeInLeft 0.7s ease both 0.1s;
   }
 
-  .cover-art {
-    width: 88px;
-    height: 88px;
-    object-fit: cover;
-    border: 2px solid var(--ink);
-    flex-shrink: 0;
-  }
-
-  .masthead-tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    line-height: 1.7;
-    color: var(--mid);
-  }
-
-  .masthead-logo {
+  .masthead-center {
     text-align: center;
     animation: fadeInDown 0.7s ease both;
   }
 
-  .masthead-logo img {
-    max-width: min(320px, 26vw);
-    height: auto;
-    display: block;
-    margin: 0 auto 8px;
+  .site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
   }
 
-  .masthead-sub-title {
+  .site-subtitle {
     font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.3em;
+    font-size: 10px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--mid);
-    text-align: center;
+    margin-top: 10px;
+    display: block;
   }
 
   .masthead-right {
     text-align: right;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--mid);
-    line-height: 1.9;
+    line-height: 2;
     animation: fadeInRight 0.7s ease both 0.1s;
   }
-  .masthead-right strong { color: var(--accent); font-weight: 400; }
+  .masthead-right strong { color: var(--ink); font-weight: 400; display: block; }
   .masthead-right a { color: var(--accent); text-decoration: none; font-size: 9px; letter-spacing: 0.2em; }
 
   nav {
     border-top: 1px solid var(--rule);
-    padding: 0 40px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -137,27 +130,26 @@
   }
   nav a:first-child { border-left: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
-  nav a.cta { background: var(--accent); color: var(--paper); }
-  nav a.cta:hover { background: var(--ink); }
+  nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
 
   /* HERO */
-  .hero-band {
-    background: var(--ink);
-    color: var(--paper);
+  .hero {
     display: grid;
-    grid-template-columns: 1fr 1px 1fr;
+    grid-template-columns: 1fr 2px 1fr;
     border-bottom: 2px solid var(--rule);
-    min-height: 300px;
+    min-height: 320px;
   }
-  .hero-divider { background: rgba(244,240,232,0.12); }
+  .hero-divider { background: var(--rule); }
 
   .hero-panel {
-    padding: 44px 40px;
+    padding: 48px 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    animation: fadeIn 0.8s ease both 0.3s;
+    animation: fadeIn 0.8s ease both 0.2s;
   }
+  .hero-panel:last-child { animation-delay: 0.35s; }
 
   .section-label {
     font-family: 'DM Mono', monospace;
@@ -168,25 +160,25 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--accent); opacity: 0.35; }
 
   .hero-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 3vw, 38px);
+    font-size: clamp(22px, 3.2vw, 40px);
     font-weight: 700;
-    line-height: 1.2;
-    color: var(--paper);
-    margin-bottom: 12px;
+    line-height: 1.15;
+    margin-bottom: 14px;
   }
   .hero-headline em { font-style: italic; color: var(--accent); }
 
   .hero-desc {
     font-size: 13px;
     line-height: 1.75;
-    color: rgba(244,240,232,0.55);
+    color: var(--mid);
     margin-bottom: 28px;
+    max-width: 380px;
   }
 
   .btn {
@@ -194,19 +186,20 @@
     align-items: center;
     gap: 10px;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 10px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
     padding: 13px 22px;
-    border: 1.5px solid rgba(244,240,232,0.35);
-    color: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
     transition: all 0.2s;
     width: fit-content;
   }
-  .btn:hover { border-color: var(--paper); background: rgba(244,240,232,0.07); }
-  .btn-accent { background: var(--accent); border-color: var(--accent); }
-  .btn-accent:hover { background: #a82c14; border-color: #a82c14; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn-accent { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  .btn-accent:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
   /* LISTEN BAR */
   .listen-bar {
@@ -226,12 +219,12 @@
     color: var(--mid);
     padding: 13px 18px 13px 0;
     margin-right: 14px;
-    border-right: 1px solid rgba(26,23,20,0.15);
+    border-right: 1px solid rgba(26,23,20,0.2);
   }
   .listen-bar a {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--ink);
@@ -242,7 +235,7 @@
   }
   .listen-bar a:hover { opacity: 1; }
 
-  /* CONTENT */
+  /* CONTENT GRID */
   .content-grid {
     display: grid;
     grid-template-columns: 2fr 1px 1fr;
@@ -253,204 +246,359 @@
   .sidebar-col { padding: 44px 32px; }
 
   .col-header {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mid);
     padding-bottom: 14px;
     border-bottom: 2px solid var(--rule);
+    margin-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
   }
   .col-header-note {
-    font-family: 'DM Mono', monospace;
     font-size: 9px;
-    letter-spacing: 0.12em;
     color: var(--mid);
-    font-weight: 400;
+    letter-spacing: 0.1em;
   }
 
+  /* EPISODES */
   .episode-item {
     display: grid;
-    grid-template-columns: 28px 1fr auto;
+    grid-template-columns: 32px 1fr auto;
     gap: 0 16px;
     align-items: start;
-    padding: 18px 0;
+    padding: 20px 0;
     border-bottom: 1px solid var(--paper-dark);
     text-decoration: none;
     color: inherit;
-    transition: all 0.15s;
+    transition: all 0.12s;
   }
-  .episode-item:hover { background: var(--paper-dark); margin: 0 -16px; padding: 18px 16px; }
+  .episode-item:hover { background: var(--paper-dark); margin: 0 -16px; padding: 20px 16px; }
+  .episode-item:last-child { border-bottom: none; }
 
-  .ep-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); padding-top: 2px; }
-  .ep-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; line-height: 1.3; margin-bottom: 5px; }
-  .ep-desc { font-size: 12px; color: var(--mid); line-height: 1.5; }
-  .ep-meta { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: var(--mid); text-align: right; white-space: nowrap; padding-top: 2px; line-height: 1.9; }
+  .ep-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .ep-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .ep-desc {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  .ep-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--mid);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 2px;
+    line-height: 2;
+    letter-spacing: 0.08em;
+  }
 
   .loading-state {
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     color: var(--mid);
-    letter-spacing: 0.15em;
-    padding: 28px 0;
+    padding: 32px 0;
     text-align: center;
     animation: pulse 1.5s ease infinite;
   }
-  @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.8} }
+  @keyframes pulse { 0%,100%{opacity:0.25} 50%{opacity:0.75} }
 
+  /* SIDEBAR */
   .sidebar-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--paper-dark); }
-  .sidebar-block:last-child { border-bottom: none; margin-bottom: 0; }
+  .sidebar-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .sidebar-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--rule);
+    margin-bottom: 16px;
+  }
 
   .substack-item {
     padding: 13px 0;
     border-bottom: 1px dotted var(--paper-dark);
+    display: block;
     text-decoration: none;
     color: inherit;
-    display: block;
     transition: opacity 0.15s;
   }
   .substack-item:last-child { border-bottom: none; }
-  .substack-item:hover { opacity: 0.65; }
-  .substack-item-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
-  .substack-item-desc { font-size: 11px; color: var(--mid); line-height: 1.5; margin-bottom: 4px; }
-  .substack-item-date { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--mid); }
+  .substack-item:hover { opacity: 0.6; }
 
-  .sidebar-btn {
-    display: inline-flex;
+  .substack-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .substack-desc { font-size: 11px; color: var(--mid); line-height: 1.5; margin-bottom: 4px; }
+  .substack-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--paper-dark);
+    border: 1px solid var(--paper-dark);
+    margin-top: 8px;
+  }
+  .stat-cell { background: var(--paper); padding: 16px 12px; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .sidebar-cta {
+    display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: var(--paper);
+    background: var(--accent);
+    padding: 12px 16px;
+    margin-top: 16px;
     text-decoration: none;
-    color: var(--ink);
-    border: 1.5px solid var(--ink);
-    padding: 11px 18px;
-    margin-top: 18px;
-    transition: all 0.2s;
+    transition: background 0.15s;
   }
-  .sidebar-btn:hover { background: var(--ink); color: var(--paper); }
+  .sidebar-cta:hover { background: var(--ink); }
 
   /* SUBSCRIBE STRIP */
-  .subscribe-strip {
+  .sub-strip {
     background: var(--ink);
     color: var(--paper);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1px 1fr;
     border-bottom: 2px solid var(--rule);
   }
+  .sub-divider { background: rgba(244,240,232,0.12); }
 
   .sub-panel {
     padding: 52px 44px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 28px;
+    gap: 18px;
   }
 
-  .sub-panel:first-child {
-    border-right: 1px solid rgba(244,240,232,0.12);
-    background-image: url('https://www.buzzsprout.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTYyNDU4MDkwLCJwdXIiOiJibG9iX2lkIn19--354032e1f8ccce2d4136ed812fce2e757302a98c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzE0MDAsMTQwMCx7ImNyb3AiOiJjZW50cmUifV0sImRlZmF1bHRfdXJsIjoiaHR0cHM6Ly93d3cuYnV6enNwcm91dC5jb20vaW1hZ2VzL2FydHdvcmtzX2xhcmdlLmpwZyIsInNhdmVyIjp7InF1YWxpdHkiOjYwfSwiY29sb3Vyc3BhY2UiOiJzcmdiIn0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--2454c883dcd12a10059f243d8ea753f8b5c1613e/RAM%20(1).png');
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  .sub-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
-  .sub-panel:first-child::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(26,23,20,0.9) 0%, rgba(26,23,20,0.72) 100%);
-  }
-  .sub-panel:first-child > * { position: relative; z-index: 1; }
 
-  .sub-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-  .sub-headline { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 44px); font-weight: 900; line-height: 1.05; }
+  .sub-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 50px);
+    font-weight: 900;
+    line-height: 1.05;
+  }
   .sub-headline em { font-style: italic; color: var(--accent); }
-  .sub-desc { font-size: 13px; line-height: 1.7; color: rgba(244,240,232,0.55); }
 
-  .sub-links { display: flex; flex-direction: column; gap: 10px; }
+  .sub-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(244,240,232,0.55);
+    max-width: 360px;
+  }
+
+  .sub-links { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+
   .sub-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    font-size: 10px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
     padding: 14px 18px;
-    border: 1.5px solid rgba(244,240,232,0.22);
+    border: 1.5px solid rgba(244,240,232,0.2);
     color: var(--paper);
-    transition: all 0.2s;
+    transition: all 0.15s;
   }
   .sub-btn:hover { border-color: var(--paper); background: rgba(244,240,232,0.06); }
-  .sub-btn.primary { background: var(--accent); border-color: var(--accent); }
-  .sub-btn.primary:hover { background: #a82c14; border-color: #a82c14; }
+  .sub-btn.accent { background: var(--accent); border-color: var(--accent); }
+  .sub-btn.accent:hover { background: #a82c14; border-color: #a82c14; }
 
   /* FOOTER */
   footer {
-    padding: 18px 40px;
+    position: relative;
+    padding: 52px 40px 32px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
+    gap: 12px;
+    min-height: 200px;
+    overflow: hidden;
+    background-image: url('https://www.buzzsprout.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTYyNDU4MDkwLCJwdXIiOiJibG9iX2lkIn19--354032e1f8ccce2d4136ed812fce2e757302a98c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzE0MDAsMTQwMCx7ImNyb3AiOiJjZW50cmUifV0sImRlZmF1bHRfdXJsIjoiaHR0cHM6Ly93d3cuYnV6enNwcm91dC5jb20vaW1hZ2VzL2FydHdvcmtzX2xhcmdlLmpwZyIsInNhdmVyIjp7InF1YWxpdHkiOjYwfSwiY29sb3Vyc3BhY2UiOiJzcmdiIn0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--2454c883dcd12a10059f243d8ea753f8b5c1613e/RAM%20(1).png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(26,23,20,0.7) 0%, rgba(26,23,20,0.88) 100%);
+  }
+
+  footer > * { position: relative; z-index: 1; }
+
+  .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 7vw, 80px);
+    font-weight: 900;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .footer-sub {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--mid);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.5);
+    text-align: center;
   }
-  footer a { color: var(--mid); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(244,240,232,0.55);
+    padding: 8px 16px;
+    border-right: 1px solid rgba(244,240,232,0.15);
+    transition: color 0.15s;
+  }
+  .footer-links a:first-child { border-left: 1px solid rgba(244,240,232,0.15); }
+  .footer-links a:hover { color: var(--paper); }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244,240,232,0.3);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn      { from{opacity:0} to{opacity:1} }
+  @keyframes fadeInDown  { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInLeft  { from{opacity:0;transform:translateX(-14px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes fadeInRight { from{opacity:0;transform:translateX(14px)} to{opacity:1;transform:translateX(0)} }
 
   /* RESPONSIVE */
   @media (max-width: 820px) {
-    .masthead-top { padding: 10px 20px; font-size: 9px; }
-    .masthead-main { grid-template-columns: 1fr; text-align: center; padding: 24px 20px; gap: 20px; }
-    .masthead-left { justify-content: center; }
-    .masthead-right { text-align: center; }
-    .masthead-logo img { max-width: 200px; }
-    nav { padding: 0 20px; }
-    nav a { padding: 12px 16px; font-size: 10px; }
-    .hero-band { grid-template-columns: 1fr; }
+    .masthead-top { padding: 10px 20px; }
+    .masthead-main { grid-template-columns: 1fr; text-align: center; padding: 24px 20px; gap: 16px; }
+    .masthead-left, .masthead-right { display: none; }
+    nav a { padding: 11px 14px; font-size: 10px; }
+    .hero { grid-template-columns: 1fr; }
     .hero-divider { display: none; }
     .hero-panel { padding: 32px 20px; }
     .listen-bar { padding: 0 20px; }
     .content-grid { grid-template-columns: 1fr; }
     .col-divider { display: none; }
-    .episodes-col { padding: 32px 20px; }
-    .sidebar-col { padding: 32px 20px; }
-    .subscribe-strip { grid-template-columns: 1fr; }
+    .episodes-col, .sidebar-col { padding: 32px 20px; }
+    .sub-strip { grid-template-columns: 1fr; }
+    .sub-divider { display: none; }
     .sub-panel { padding: 36px 24px; }
-    footer { flex-direction: column; gap: 8px; text-align: center; padding: 16px 20px; }
+    footer { padding: 48px 24px 28px; }
   }
-
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  @keyframes fadeInDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeInLeft { from{opacity:0;transform:translateX(-14px)} to{opacity:1;transform:translateX(0)} }
-  @keyframes fadeInRight { from{opacity:0;transform:translateX(14px)} to{opacity:1;transform:translateX(0)} }
 </style>
 </head>
 <body>
 
+<!-- MASTHEAD -->
 <header class="masthead">
   <div class="masthead-top">
     <span id="live-date">Est. 2026 · Austin, TX</span>
-    <span style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER LIVE ✦</span>
+    <span style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</span>
     <span>Live From the City That Never Works</span>
   </div>
 
-    <div class="masthead-logo">
-      <img src="https://substack-post-media.s3.amazonaws.com/public/images/a2274b88-6f5b-4b07-a320-4f8c35a30380_519x159.png" alt="RAMBLER" />
-      <div class="masthead-sub-title">Live From the City That Never Works</div>
+  <div class="masthead-main">
+    <div class="masthead-left">
+      Podcasting since 2026<br>
+      <span id="ep-count-left">9 Episodes</span><br>
+      Weekly · ~10 min
+    </div>
+
+    <div class="masthead-center">
+      <h1 class="site-title">RAMBLER</h1>
+      <span class="site-subtitle">Live From the City That Never Works</span>
     </div>
 
     <div class="masthead-right">
-      <div>By <strong>Austin Grey</strong></div>
-      <div id="ep-count-header">–– Episodes</div>
-      <div>Weekly · ~10 min</div>
-      <div style="margin-top:6px"><a href="https://ramblermediaclub.substack.com" target="_blank">Media Club ↗</a></div>
+      <strong>Austin Grey</strong>
+      Solo · Monologue<br>
+      Austin, Texas<br>
+      <a href="https://ramblermediaclub.substack.com" target="_blank">Media Club ↗</a>
     </div>
   </div>
 
@@ -459,11 +607,13 @@
     <a href="#media-club">Media Club</a>
     <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
     <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
+    <a href="https://overcast.fm" target="_blank">Overcast</a>
     <a href="https://ramblermediaclub.substack.com" target="_blank" class="cta">Subscribe Free →</a>
   </nav>
 </header>
 
-<section class="hero-band">
+<!-- HERO -->
+<section class="hero">
   <div class="hero-panel">
     <div>
       <div class="section-label">The Podcast</div>
@@ -472,7 +622,9 @@
     </div>
     <a href="#episodes" class="btn btn-accent">▶ Browse Episodes</a>
   </div>
+
   <div class="hero-divider"></div>
+
   <div class="hero-panel">
     <div>
       <div class="section-label">Rambler: Media Club</div>
@@ -483,6 +635,7 @@
   </div>
 </section>
 
+<!-- LISTEN BAR -->
 <div class="listen-bar">
   <span class="listen-label">Listen on</span>
   <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
@@ -492,196 +645,203 @@
   <a href="https://feeds.buzzsprout.com/2569924.rss" target="_blank">RSS Feed</a>
 </div>
 
+<!-- CONTENT -->
 <section class="content-grid">
   <div class="episodes-col" id="episodes">
     <div class="col-header">
-      Recent Episodes
-      <span class="col-header-note" id="ep-count-label">Fetching feed…</span>
+      Episodes
+      <span class="col-header-note" id="ep-count-label">Loading…</span>
     </div>
-    <div id="episodes-list"><div class="loading-state">Loading episodes…</div></div>
+    <div id="episodes-list"><div class="loading-state">Fetching latest episodes…</div></div>
   </div>
 
   <div class="col-divider"></div>
 
-  <div class="sidebar-col" id="media-club">
+  <aside class="sidebar-col" id="media-club">
     <div class="sidebar-block">
-      <div class="section-label">Rambler: Media Club</div>
-      <div class="col-header" style="font-size:20px; padding-bottom:12px; margin-bottom:18px;">
-        Latest Posts
-        <span class="col-header-note" id="substack-label"></span>
-      </div>
-      <div id="substack-list"><div class="loading-state">Loading newsletter…</div></div>
-      <a href="https://ramblermediaclub.substack.com" class="sidebar-btn" target="_blank">All Posts →</a>
+      <div class="sidebar-block-label">Rambler: Media Club</div>
+      <div id="substack-list"><div class="loading-state">Loading…</div></div>
+      <a href="https://ramblermediaclub.substack.com" class="sidebar-cta" target="_blank">
+        <span>All Posts on Substack</span><span>→</span>
+      </a>
     </div>
 
     <div class="sidebar-block">
-      <div class="section-label">By the Numbers</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:10px;">
-        <div>
-          <div id="stat-eps" style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--accent);line-height:1;">–</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-top:4px;">Episodes</div>
-        </div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--accent);line-height:1;">~10</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-top:4px;">Min Each</div>
-        </div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--accent);line-height:1;">Wkly</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-top:4px;">Cadence</div>
-        </div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--accent);line-height:1;">Free</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-top:4px;">To Follow</div>
-        </div>
+      <div class="sidebar-block-label">By the Numbers</div>
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="stat-num" id="stat-eps">9</div><div class="stat-label">Episodes</div></div>
+        <div class="stat-cell"><div class="stat-num">~10</div><div class="stat-label">Min Each</div></div>
+        <div class="stat-cell"><div class="stat-num">Wkly</div><div class="stat-label">Cadence</div></div>
+        <div class="stat-cell"><div class="stat-num">Free</div><div class="stat-label">To Follow</div></div>
       </div>
     </div>
-  </div>
+  </aside>
 </section>
 
-<section class="subscribe-strip">
+<!-- SUBSCRIBE STRIP -->
+<section class="sub-strip">
   <div class="sub-panel">
-    <div>
-      <div class="sub-eyebrow">The Podcast</div>
-      <h2 class="sub-headline">Follow<br>the <em>show.</em></h2>
-    </div>
-    <p class="sub-desc">New episodes every week. ~10 minutes. Available wherever you listen to podcasts.</p>
+    <div class="sub-eyebrow">The Podcast</div>
+    <h2 class="sub-headline">Follow<br>the <em>show.</em></h2>
+    <p class="sub-desc">New episodes every week. About 10 minutes. Available wherever you listen to podcasts.</p>
     <div class="sub-links">
-      <a href="https://podcasts.apple.com/podcast/id1866460662" class="sub-btn primary" target="_blank"><span>Apple Podcasts</span><span>→</span></a>
+      <a href="https://podcasts.apple.com/podcast/id1866460662" class="sub-btn accent" target="_blank"><span>Apple Podcasts</span><span>→</span></a>
       <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" class="sub-btn" target="_blank"><span>Spotify</span><span>→</span></a>
       <a href="https://feeds.buzzsprout.com/2569924.rss" class="sub-btn" target="_blank"><span>RSS Feed</span><span>→</span></a>
     </div>
   </div>
+
+  <div class="sub-divider"></div>
+
   <div class="sub-panel">
-    <div>
-      <div class="sub-eyebrow">Rambler: Media Club</div>
-      <h2 class="sub-headline">Read the<br>show's <em>mind.</em></h2>
-    </div>
-    <p class="sub-desc">The books, songs, films, and rabbit holes behind each episode. The newsletter that goes deeper. Free to subscribe.</p>
+    <div class="sub-eyebrow">Rambler: Media Club</div>
+    <h2 class="sub-headline">Read the<br>show's <em>mind.</em></h2>
+    <p class="sub-desc">The books, songs, films, and rabbit holes behind each episode. The newsletter that goes deeper. Free to subscribe on Substack.</p>
     <div class="sub-links">
-      <a href="https://ramblermediaclub.substack.com" class="sub-btn primary" target="_blank"><span>Subscribe Free on Substack</span><span>→</span></a>
+      <a href="https://ramblermediaclub.substack.com" class="sub-btn accent" target="_blank"><span>Subscribe Free on Substack</span><span>→</span></a>
     </div>
   </div>
 </section>
 
+<!-- FOOTER  -->
 <footer>
-  <span>© 2026 Rambler · Austin Grey</span>
-  <span style="color:var(--accent);">✦</span>
-  <span>
-    <a href="https://feeds.buzzsprout.com/2569924.rss">RSS</a> ·
-    <a href="https://ramblermediaclub.substack.com">Substack</a> ·
-    <a href="https://podcasts.apple.com/podcast/id1866460662">Apple</a> ·
-    <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru">Spotify</a>
-  </span>
+  <div class="footer-title">RAMBLER</div>
+  <div class="footer-sub">Live From the City That Never Works</div>
+  <div class="footer-links">
+    <a href="https://feeds.buzzsprout.com/2569924.rss" target="_blank">RSS</a>
+    <a href="https://ramblermediaclub.substack.com" target="_blank">Substack</a>
+    <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple</a>
+    <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
+    <a href="https://overcast.fm" target="_blank">Overcast</a>
+  </div>
+  <div class="footer-copy">© 2026 Rambler · Austin Grey · All rights reserved</div>
 </footer>
 
 <script>
-  // Live date
-  const d = new Date();
   document.getElementById('live-date').textContent =
-    d.toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
-
-  function fmtDur(secs) {
-    if (!secs) return '';
-    const s = parseInt(secs);
-    if (isNaN(s)) return secs; // already formatted like "10:33"
-    return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-  }
+    new Date().toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'});
 
   function fmtDate(str) {
     try { return new Date(str).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
-    catch { return str; }
+    catch(e) { return ''; }
+  }
+  function fmtDur(val) {
+    if (!val) return '';
+    if (String(val).includes(':')) return val;
+    const s = parseInt(val);
+    if (isNaN(s)) return val;
+    return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  }
+  function stripHTML(str) {
+    return str.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'').trim();
   }
 
-  // Load Buzzsprout RSS
+  const FALLBACK_EPISODES = [
+    { num:9, title:'A Couple Tips on Starting a Cult', desc:'A lot of these new era cult leaders have it all wrong. A few lessons learned from some of the larger cults.', dur:'13:03', date:'Feb 19, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18714677-a-couple-tips-on-starting-a-cult' },
+    { num:8, title:'I Love You: Ya Hunk of Junk', desc:'A love letter to my car. The hunk of junk that refuses to get rid of me. My ride or die.', dur:'10:33', date:'Feb 8, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18640248-i-love-you-ya-hunk-of-junk' },
+    { num:7, title:"Snowmageddon: Surviving Mother Earth's Cold Shoulder", desc:'How do we survive the coldest days of the winter? Sometimes friends are the most important thing we thaw along the way.', dur:'11:46', date:'Jan 31, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18603191-snowmageddon-surviving-mother-earth-s-cold-shoulder' },
+    { num:6, title:'Flip a Coin: I Am Not Picking a Side', desc:'How I accidentally became "the guy with an opinion" after weighing in on the placement of an office plant.', dur:'8:43', date:'Jan 25, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18562777-flip-a-coin-i-am-not-picking-a-side' },
+    { num:5, title:'Wedding Season: We Really Had a Good Thing Going', desc:'Weddings have the potential to be the most beautiful thing in the world. Until the performative people took over.', dur:'10:43', date:'Jan 18, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18525158-wedding-season-we-really-had-a-good-thing-going' },
+    { num:4, title:'NYE — Who Will the Kiss Be? Oh Please Not Her', desc:"New Year's Eve and all the social landmines that come with it.", dur:'9:12', date:'Jan 12, 2026', link:'https://www.ramblerlive.com' },
+    { num:3, title:'Gym Bamboozlement — Getting Trapped in a Toxic Gym Relationship', desc:'How a gym membership becomes a personality trait you never asked for.', dur:'10:05', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
+    { num:2, title:'Beef with the Butcher — Escaping the Grocery Store with Minimal Injuries', desc:'A complete breakdown of the modern grocery store experience.', dur:'9:48', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
+    { num:1, title:'Airport Odyssey — Destination Unknown', desc:"The adventure isn't the destination. It's navigating the terminal.", dur:'8:22', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
+  ];
+
+  const FALLBACK_POSTS = [
+    { title:'Media Guide: Hunk of Junk', desc:'The songs, shows, and rabbit holes behind the car episode — including the Dave Ramsey Facebook ad that started it all.', date:'Feb 8, 2026', link:'https://ramblermediaclub.substack.com' },
+  ];
+
+  function renderEpisodes(eps) {
+    const c = document.getElementById('episodes-list');
+    c.innerHTML = '';
+    eps.forEach((ep, i) => {
+      const a = document.createElement('a');
+      a.className = 'episode-item';
+      a.href = ep.link;
+      a.target = '_blank';
+      a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
+      a.innerHTML = `
+        <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
+        <div>
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-desc">${ep.desc}</div>
+        </div>
+        <div class="ep-meta">
+          <span style="display:block">${ep.dur}</span>
+          <span>${ep.date}</span>
+        </div>`;
+      c.appendChild(a);
+    });
+  }
+
+  function renderSubstack(posts) {
+    const c = document.getElementById('substack-list');
+    c.innerHTML = '';
+    posts.forEach(post => {
+      const a = document.createElement('a');
+      a.className = 'substack-item';
+      a.href = post.link;
+      a.target = '_blank';
+      a.innerHTML = `
+        <div class="substack-title">${post.title}</div>
+        <div class="substack-desc">${post.desc}</div>
+        <div class="substack-date">${post.date}</div>`;
+      c.appendChild(a);
+    });
+  }
+
+  async function fetchXML(url) {
+    const proxies = [
+      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+      `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    ];
+    for (const proxy of proxies) {
+      try {
+        const res = await fetch(proxy, { signal: AbortSignal.timeout(7000) });
+        if (!res.ok) continue;
+        const json = await res.json();
+        const content = json.contents || json.body || '';
+        if (content.includes('<rss') || content.includes('<channel') || content.includes('<feed')) return content;
+      } catch(e) { continue; }
+    }
+    return null;
+  }
+
   async function loadEpisodes() {
-    const PROXY = 'https://api.allorigins.win/get?url=';
-    const FEED  = 'https://feeds.buzzsprout.com/2569924.rss';
+    const xml = await fetchXML('https://feeds.buzzsprout.com/2569924.rss');
+    if (!xml) { renderEpisodes(FALLBACK_EPISODES); document.getElementById('ep-count-label').textContent = '9 episodes'; return; }
     try {
-      const res  = await fetch(PROXY + encodeURIComponent(FEED));
-      const json = await res.json();
-      const xml  = new DOMParser().parseFromString(json.contents, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item'));
+      const doc   = new DOMParser().parseFromString(xml, 'text/xml');
+      const items = Array.from(doc.querySelectorAll('item'));
       const total = items.length;
-
-      document.getElementById('ep-count-label').textContent = `${total} episodes · live feed`;
-      document.getElementById('ep-count-header').textContent = `${total} Episodes`;
       document.getElementById('stat-eps').textContent = total;
-
-      const container = document.getElementById('episodes-list');
-      container.innerHTML = '';
-
-      items.forEach((item, i) => {
-        const title  = item.querySelector('title')?.textContent?.trim() || 'Untitled';
-        const link   = item.querySelector('link')?.textContent?.trim() || '#';
-        const date   = item.querySelector('pubDate')?.textContent || '';
-        const rawDesc = item.querySelector('description')?.textContent || '';
-        const desc   = rawDesc.replace(/<[^>]+>/g,'').trim().slice(0,110) + (rawDesc.length > 110 ? '…' : '');
-        const durEl  = item.getElementsByTagNameNS('*','duration')[0];
-        const dur    = durEl ? (durEl.textContent.includes(':') ? durEl.textContent : fmtDur(durEl.textContent)) : '';
-
-        const el = document.createElement('a');
-        el.className = 'episode-item';
-        el.href = link;
-        el.target = '_blank';
-        el.style.cssText = `animation: fadeIn 0.5s ease both ${i * 0.05}s`;
-        el.innerHTML = `
-          <span class="ep-num">${String(total - i).padStart(2,'0')}</span>
-          <div>
-            <div class="ep-title">${title}</div>
-            <div class="ep-desc">${desc}</div>
-          </div>
-          <div class="ep-meta">
-            <span style="display:block">${dur}</span>
-            <span>${fmtDate(date)}</span>
-          </div>`;
-        container.appendChild(el);
-      });
-    } catch(e) {
-      document.getElementById('episodes-list').innerHTML =
-        `<p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);padding:24px 0;">
-          <a href="https://www.ramblerlive.com" style="color:var(--accent)">Browse all episodes →</a>
-        </p>`;
-    }
+      document.getElementById('ep-count-left').textContent = `${total} Episodes`;
+      document.getElementById('ep-count-label').textContent = `${total} episodes · live`;
+      renderEpisodes(items.map((item, i) => ({
+        num:  total - i,
+        title: item.querySelector('title')?.textContent?.trim() || '',
+        desc:  stripHTML(item.querySelector('description')?.textContent || '').slice(0,115) + '…',
+        dur:   fmtDur(item.getElementsByTagNameNS('*','duration')[0]?.textContent || ''),
+        date:  fmtDate(item.querySelector('pubDate')?.textContent || ''),
+        link:  item.querySelector('link')?.textContent?.trim() || '#',
+      })));
+    } catch(e) { renderEpisodes(FALLBACK_EPISODES); }
   }
 
-  // Load Substack RSS
   async function loadSubstack() {
-    const PROXY = 'https://api.allorigins.win/get?url=';
-    const FEED  = 'https://ramblermediaclub.substack.com/feed';
+    const xml = await fetchXML('https://ramblermediaclub.substack.com/feed');
+    if (!xml) { renderSubstack(FALLBACK_POSTS); return; }
     try {
-      const res  = await fetch(PROXY + encodeURIComponent(FEED));
-      const json = await res.json();
-      const xml  = new DOMParser().parseFromString(json.contents, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item')).slice(0, 5);
-
-      document.getElementById('substack-label').textContent = `${items.length} recent`;
-
-      const container = document.getElementById('substack-list');
-      container.innerHTML = '';
-
-      items.forEach(item => {
-        const title = item.querySelector('title')?.textContent?.trim() || '';
-        const link  = item.querySelector('link')?.textContent?.trim() || '#';
-        const date  = item.querySelector('pubDate')?.textContent || '';
-        const raw   = item.querySelector('description')?.textContent || '';
-        const desc  = raw.replace(/<[^>]+>/g,'').trim().slice(0,95) + '…';
-
-        const el = document.createElement('a');
-        el.className = 'substack-item';
-        el.href = link;
-        el.target = '_blank';
-        el.innerHTML = `
-          <div class="substack-item-title">${title}</div>
-          <div class="substack-item-desc">${desc}</div>
-          <div class="substack-item-date">${fmtDate(date)}</div>`;
-        container.appendChild(el);
-      });
-    } catch(e) {
-      document.getElementById('substack-list').innerHTML =
-        `<p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);padding:8px 0;">
-          <a href="https://ramblermediaclub.substack.com" style="color:var(--accent)">Read on Substack →</a>
-        </p>`;
-    }
+      const doc   = new DOMParser().parseFromString(xml, 'text/xml');
+      const items = Array.from(doc.querySelectorAll('item')).slice(0, 5);
+      renderSubstack(items.map(item => ({
+        title: item.querySelector('title')?.textContent?.trim() || '',
+        desc:  stripHTML(item.querySelector('description')?.textContent || '').slice(0,100) + '…',
+        date:  fmtDate(item.querySelector('pubDate')?.textContent || ''),
+        link:  item.querySelector('link')?.textContent?.trim() || '#',
+      })));
+    } catch(e) { renderSubstack(FALLBACK_POSTS); }
   }
 
   loadEpisodes();
