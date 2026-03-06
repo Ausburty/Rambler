@@ -118,6 +118,7 @@
   .nav-left {
     display: flex;
     align-items: stretch;
+    justify-content: center;
   }
   .nav-divider {
     background: var(--rule);
@@ -125,7 +126,7 @@
   .nav-right {
     display: flex;
     align-items: stretch;
-    justify-content: flex-end;
+    justify-content: center;
   }
   nav a {
     font-family: 'DM Mono', monospace;
@@ -141,7 +142,9 @@
     white-space: nowrap;
   }
   .nav-left a { border-right: 1px solid var(--rule); }
-  .nav-right a { border-left: 1px solid var(--rule); }
+  .nav-left a:first-child { border-left: 1px solid var(--rule); }
+  .nav-right a { border-right: 1px solid var(--rule); }
+  .nav-right a:first-child { border-left: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
   nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
   nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
