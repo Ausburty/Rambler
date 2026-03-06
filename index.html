@@ -728,97 +728,52 @@
     try { return new Date(str).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
     catch(e) { return ''; }
   }
-  function fmtDur(val) {
-    if (!val) return '';
-    if (String(val).includes(':')) return val;
-    const s = parseInt(val);
-    if (isNaN(s)) return val;
-    return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-  }
   function stripHTML(str) {
     return str.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'').trim();
   }
 
   const FALLBACK_EPISODES = [
-    { num:9, title:'A Couple Tips on Starting a Cult', desc:'A lot of these new era cult leaders have it all wrong. A few lessons learned from some of the larger cults.', dur:'13:03', date:'Feb 19, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18714677-a-couple-tips-on-starting-a-cult' },
-    { num:8, title:'I Love You: Ya Hunk of Junk', desc:'A love letter to my car. The hunk of junk that refuses to get rid of me. My ride or die.', dur:'10:33', date:'Feb 8, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18640248-i-love-you-ya-hunk-of-junk' },
-    { num:7, title:"Snowmageddon: Surviving Mother Earth's Cold Shoulder", desc:'How do we survive the coldest days of the winter? Sometimes friends are the most important thing we thaw along the way.', dur:'11:46', date:'Jan 31, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18603191-snowmageddon-surviving-mother-earth-s-cold-shoulder' },
-    { num:6, title:'Flip a Coin: I Am Not Picking a Side', desc:'How I accidentally became "the guy with an opinion" after weighing in on the placement of an office plant.', dur:'8:43', date:'Jan 25, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18562777-flip-a-coin-i-am-not-picking-a-side' },
-    { num:5, title:'Wedding Season: We Really Had a Good Thing Going', desc:'Weddings have the potential to be the most beautiful thing in the world. Until the performative people took over.', dur:'10:43', date:'Jan 18, 2026', link:'https://www.ramblerlive.com/2569924/episodes/18525158-wedding-season-we-really-had-a-good-thing-going' },
-    { num:4, title:'NYE — Who Will the Kiss Be? Oh Please Not Her', desc:"New Year's Eve and all the social landmines that come with it.", dur:'9:12', date:'Jan 12, 2026', link:'https://www.ramblerlive.com' },
-    { num:3, title:'Gym Bamboozlement — Getting Trapped in a Toxic Gym Relationship', desc:'How a gym membership becomes a personality trait you never asked for.', dur:'10:05', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
-    { num:2, title:'Beef with the Butcher — Escaping the Grocery Store with Minimal Injuries', desc:'A complete breakdown of the modern grocery store experience.', dur:'9:48', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
-    { num:1, title:'Airport Odyssey — Destination Unknown', desc:"The adventure isn't the destination. It's navigating the terminal.", dur:'8:22', date:'Jan 4, 2026', link:'https://www.ramblerlive.com' },
+    { num:9, id:'18714677', title:'A Couple Tips on Starting a Cult', desc:'A lot of these new era cult leaders have it all wrong.', dur:'13:03', date:'Feb 19, 2026' },
+    { num:8, id:'18640248', title:'I Love You: Ya Hunk of Junk', desc:'A love letter to my car. The hunk of junk that refuses to get rid of me.', dur:'10:33', date:'Feb 8, 2026' },
+    { num:7, id:'18603191', title:"Snowmageddon: Surviving Mother Earth's Cold Shoulder", desc:'How do we survive the coldest days of the winter?', dur:'11:46', date:'Jan 31, 2026' },
+    { num:6, id:'18562777', title:'Flip a Coin: I Am Not Picking a Side', desc:'How I accidentally became "the guy with an opinion."', dur:'8:43', date:'Jan 25, 2026' },
+    { num:5, id:'18525158', title:'Wedding Season: We Really Had a Good Thing Going', desc:'Weddings have the potential to be the most beautiful thing in the world.', dur:'10:43', date:'Jan 18, 2026' },
+    { num:4, id:'18498790', title:'NYE — Who Will the Kiss Be? Oh Please Not Her', desc:"New Year's Eve and all the social landmines that come with it.", dur:'9:08', date:'Jan 12, 2026' },
+    { num:3, id:'18452593', title:'Airport Odyssey — Destination Unknown', desc:"The adventure isn't the destination. It's navigating the terminal.", dur:'9:47', date:'Jan 4, 2026' },
+    { num:2, id:'18452589', title:'Beef with the Butcher — Escaping the Grocery Store with Minimal Injuries', desc:'A complete breakdown of the modern grocery store experience.', dur:'9:54', date:'Jan 4, 2026' },
+    { num:1, id:'18452585', title:'Gym Bamboozlement — Getting Trapped in a Toxic Gym Relationship', desc:'How a gym membership becomes a personality trait you never asked for.', dur:'9:28', date:'Jan 4, 2026' },
   ];
 
   const FALLBACK_POSTS = [
-    { title:'Media Guide: Hunk of Junk', desc:'The songs, shows, and rabbit holes behind the car episode — including the Dave Ramsey Facebook ad that started it all.', date:'Feb 8, 2026', link:'https://ramblermediaclub.substack.com' },
+    { title:'Media Guide: Hunk of Junk', desc:'The songs, shows, and rabbit holes behind the car episode.', date:'Feb 8, 2026', link:'https://ramblermediaclub.substack.com' },
   ];
 
-function renderEpisodes(eps) {
-  const c = document.getElementById('episodes-list');
-  c.innerHTML = '';
-  eps.forEach((ep, i) => {
-    const a = document.createElement('a');
-    a.className = 'episode-item';
-    a.href = `/Rambler/episodes/episode.html?id=${ep.id}`;
-    a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
-    a.innerHTML = `
-      <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
-      <div>
-        <div class="ep-title">${ep.title}</div>
-        <div class="ep-desc">${ep.desc}</div>
-      </div>
-      <div class="ep-meta">
-        <span style="display:block">${ep.dur}</span>
-        <span>${ep.date}</span>
-      </div>`;
-    c.appendChild(a);
-  });
-}
-
-function renderSubstack(posts) {
-  const c = document.getElementById('substack-list');
-  c.innerHTML = '';
-  posts.forEach(post => {
-    const a = document.createElement('a');
-    a.className = 'substack-item';
-    a.href = post.link;
-    a.target = '_blank';
-    a.innerHTML = `
-      <div class="substack-title">${post.title}</div>
-      <div class="substack-desc">${post.desc}</div>
-      <div class="substack-date">${post.date}</div>`;
-    c.appendChild(a);
-  });
-}
-
-async function loadEpisodes() {
-  try {
-    const res = await fetch('/Rambler/episodes.json');
-    const eps = await res.json();
-    document.getElementById('stat-eps').textContent = eps.length;
-    document.getElementById('ep-count-left').textContent = `${eps.length} Episodes`;
-    document.getElementById('ep-count-label').textContent = `${eps.length} episodes · live`;
-    renderEpisodes(eps);
-  } catch(e) {
-    renderEpisodes(FALLBACK_EPISODES);
-    document.getElementById('ep-count-label').textContent = '9 episodes';
+  function renderEpisodes(eps) {
+    const c = document.getElementById('episodes-list');
+    c.innerHTML = '';
+    eps.forEach((ep, i) => {
+      const a = document.createElement('a');
+      a.className = 'episode-item';
+      a.href = `/episodes/episode.html?id=${ep.id}`;
+      a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
+      a.innerHTML = `
+        <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
+        <div>
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-desc">${ep.desc}</div>
+        </div>
+        <div class="ep-meta">
+          <span style="display:block">${ep.dur}</span>
+          <span>${ep.date}</span>
+        </div>`;
+      c.appendChild(a);
+    });
   }
-}
 
-async function loadSubstack() {
-  try {
-    const res = await fetch('/Rambler/posts.json');
-    const posts = await res.json();
-    renderSubstack(posts);
-  } catch(e) {
-    renderSubstack(FALLBACK_POSTS);
-  }
-}
-
-loadEpisodes();
-loadSubstack();
-</script>
+  function renderSubstack(posts) {
+    const c = document.getElementById('substack-list');
+    c.innerHTML = '';
+    posts.forEach(post => {
+      const a = document.createElement('a');
 </body>
 </html>
