@@ -532,32 +532,44 @@
     catch(e) { return str; }
   }
 
+  function stripHTML(str) {
+    return str.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'').trim();
+  }
+
+  // Get episode ID from URL query string ?id=XXXXXXXX
   const params = new URLSearchParams(window.location.search);
   const epId = params.get('id');
 
   async function init() {
-    const res = await fetch('/episodes.json');
+    // Load episodes.json
+    const res = await fetch('/Rambler/episodes.json');
     const episodes = await res.json();
 
+    // Find this episode
     const ep = episodes.find(e => e.id === epId) || episodes[0];
 
+    // Set page title
     document.title = `Rambler — ${ep.title}`;
+
+    // Populate header
     document.getElementById('ep-num').textContent = `Episode ${String(ep.num).padStart(2,'0')}`;
     document.getElementById('ep-title').textContent = ep.title;
     document.getElementById('ep-date').textContent = fmtDate(ep.date);
     document.getElementById('ep-dur').textContent = ep.dur;
     document.getElementById('ep-desc').textContent = ep.desc.replace('…','');
 
+    // Set audio player
     document.getElementById('audio-src').src = ep.mp3;
     document.getElementById('audio-player').load();
     document.getElementById('mp3-link').href = ep.mp3;
 
+    // Populate sidebar
     const sidebar = document.getElementById('sidebar-episodes');
     sidebar.innerHTML = '';
     episodes.forEach(e => {
       const a = document.createElement('a');
       a.className = 'sidebar-ep-link' + (e.id === ep.id ? ' active' : '');
-      a.href = `/episodes/episode.html?id=${e.id}`;
+      a.href = `/Rambler/episodes/episode.html?id=${e.id}`;
       a.innerHTML = `
         <div class="sidebar-ep-num">EP ${String(e.num).padStart(2,'0')}</div>
         <div class="sidebar-ep-title">${e.title}</div>
@@ -565,22 +577,32 @@
       sidebar.appendChild(a);
     });
 
+    // Load transcript
     loadTranscript(ep);
   }
 
   async function loadTranscript(ep) {
     const body = document.getElementById('transcript-body');
     try {
-      const res = await fetch(`/transcripts/${ep.id}.html`);
+      // Try via Cloudflare Worker proxy to avoid CORS
+      const proxyUrl = `https://substack-proxy.austinburton.workers.dev/?url=${encodeURIComponent(ep.transcript)}`;
+      const res = await fetch(proxyUrl);
       const html = await res.text();
+
+      // Parse the Buzzsprout transcript HTML
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      const segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
-      body.innerHTML = '';
+
+      // Buzzsprout transcript wraps text in <p> tags inside a .ts-segment or similar
+      // Try multiple selectors
+      let segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
       if (segments.length === 0) {
-        body.innerHTML = `<p>${doc.body.textContent.trim()}</p>`;
+        // Fallback: just grab all text
+        body.innerHTML = `<p>${stripHTML(html).slice(0, 5000)}</p>`;
         return;
       }
+
+      body.innerHTML = '';
       segments.forEach(seg => {
         const text = seg.textContent.trim();
         if (text.length > 10) {
@@ -589,8 +611,11 @@
           body.appendChild(p);
         }
       });
+
     } catch(e) {
-      body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">Transcript unavailable.</p>`;
+      body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">
+        Transcript unavailable. <a href="${ep.transcript}" target="_blank" style="color:var(--accent)">View on Buzzsprout →</a>
+      </p>`;
     }
   }
 
