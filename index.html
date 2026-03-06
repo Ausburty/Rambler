@@ -42,16 +42,20 @@
   .masthead { border-bottom: 3px double var(--rule); }
 
 .masthead-top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 10px 40px;  /* same horizontal padding as masthead-main */
+  padding: 10px 40px;
   border-bottom: 1px solid var(--rule);
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--mid);
+}
+
+.masthead-top-right {
+  text-align: right;
 }
 
   .masthead-main {
@@ -575,11 +579,11 @@
 
 <!-- MASTHEAD -->
 <header class="masthead">
-  <div class="masthead-top">
-    <span id="live-date">Est. 2026 · Austin, TX</span>
-    <span style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</span>
-    <span>Live From the City That Never Works</span>
-  </div>
+ <div class="masthead-top">
+  <div>Est. 2026 · Austin, TX</div>
+  <div style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</div>
+  <div class="masthead-top-right">Live From the City That Never Works</div>
+</div>
 
   <div class="masthead-main">
     <div class="masthead-left">
