@@ -13,13 +13,20 @@ items = tree.findall('./channel/item')
 episodes = []
 for i, item in enumerate(items):
     dur = item.find('itunes:duration', ns)
+    raw_desc = strip(item.findtext('description', ''))
+    clean_desc = raw_desc.replace('Send a text', '').strip()
+    link = item.findtext('link') or ''
+    if not link:
+        enclosure = item.find('enclosure')
+        guid = item.findtext('guid') or ''
+        link = guid if guid.startswith('http') else 'https://www.ramblerlive.com'
     episodes.append({
         'num': len(items) - i,
         'title': item.findtext('title', '').strip(),
-        'desc': strip(item.findtext('description', ''))[:120] + '…',
+        'desc': clean_desc[:120] + '…',
         'dur': dur.text if dur is not None else '',
         'date': item.findtext('pubDate', ''),
-        'link': item.findtext('link', ''),
+        'link': link,
     })
 with open('episodes.json', 'w') as f:
     json.dump(episodes, f)
