@@ -1,13 +1,1 @@
-
-[]
-```
-Click **Commit changes**. The GitHub Action will overwrite this with real data when it runs — you just need the file to exist.
-
-Do the same for `posts.json`.
-
----
-
-**Step 2 — Create the scripts folder and Python file**
-Click **Add file → Create new file**. In the filename box type exactly:
-```
-scripts/parse_feed.py
+[{"num": 9, "title": "A Couple Tips on Starting a Cult", "desc": "Send a textA lot of these new era cult leaders have it all wrong. I share a few lessons learned from some of the larger \u2026", "dur": "783", "date": "Thu, 19 Feb 2026 22:00:00 -0500", "link": ""}, {"num": 8, "title": "I Love You: Ya Hunk of Junk", "desc": "Send a textCheck out the brand new substack!This is a love letter the my car. The hunk of junk that refuses to get rid o\u2026", "dur": "633", "date": "Sun, 08 Feb 2026 01:00:00 -0500", "link": ""}, {"num": 7, "title": "Snowmageddon: Surviving Mother Earth's Cold Shoulder", "desc": "Send a textHow do we survive the coldest days of the winter? Arguably not well. However, we do it together. Sometimes fr\u2026", "dur": "706", "date": "Sat, 31 Jan 2026 22:00:00 -0500", "link": ""}, {"num": 6, "title": "Flip a Coin: I am not Picking a Side", "desc": "Send a textA short, meandering rant about how I accidentally became \u201cthe guy with an opinion\u201d after weighing in on the p\u2026", "dur": "523", "date": "Sun, 25 Jan 2026 18:00:00 -0500", "link": ""}, {"num": 5, "title": "Wedding Season: We Really had a Good Thing Going", "desc": "Send a textWeddings have the potential to be the most beautiful thing in the world. Until the performative people took o\u2026", "dur": "643", "date": "Sun, 18 Jan 2026 09:00:00 -0500", "link": ""}, {"num": 4, "title": "NYE - Who will the Kiss Be? Oh Please Not Her", "desc": "Send a textThe stakes are high, for the first time in a year we have an excuse to kiss a girl, and odds are they are act\u2026", "dur": "548", "date": "Mon, 12 Jan 2026 22:00:00 -0500", "link": ""}, {"num": 3, "title": "Airport Oddyssey - Destination Unknown but the Adventure is Navigating the Terminal", "desc": "Send a textWhat should have been a straightforward trip turns into a liminal, cocktail-fueled odyssey through the unique\u2026", "dur": "587", "date": "Sun, 04 Jan 2026 21:00:00 -0500", "link": ""}, {"num": 2, "title": "Beef with the Butcher - Escaping the Grocery Store with Minimal Injuries", "desc": "Send a textA simple errand spirals into a full-blown moral standoff when I walk into the deli section expecting sustenan\u2026", "dur": "594", "date": "Sun, 04 Jan 2026 21:00:00 -0500", "link": ""}, {"num": 1, "title": "Gym Bamboozlement - Getting Trapped in a Toxic Gym Relationship", "desc": "Send a textWhat starts as a reluctant step into a fluorescent-lit gym quickly turns into an existential comedy about rou\u2026", "dur": "568", "date": "Sun, 04 Jan 2026 21:00:00 -0500", "link": ""}]
