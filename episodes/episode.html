@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rambler — Episode</title>
+<meta name="description" content="Listen to Rambler, a podcast by Austin Grey. Equal parts dry humor and sincerity.">
+<meta property="og:title" content="Rambler — Episode">
+<meta property="og:description" content="Listen to Rambler, a podcast by Austin Grey.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -131,9 +136,6 @@
   nav a:hover { background: var(--ink); color: var(--paper); }
   nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
   nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
-
-  /* MOBILE BOTTOM BAR */
-  .mobile-nav { display: none; }
 
   /* MOBILE BOTTOM BAR */
   .mobile-nav { display: none; }
@@ -474,7 +476,7 @@
 <!-- MASTHEAD -->
 <header class="masthead">
   <div class="masthead-top">
-    <div id="live-date">Est. 2026 · Austin, TX</div>
+    <div id="live-date"></div>
     <div style="color:var(--accent); letter-spacing:0.25em;">✦ RAMBLER ✦</div>
     <div class="masthead-top-right">Live From the City That Never Works</div>
   </div>
@@ -496,7 +498,7 @@
     </div>
   </div>
 
-  <nav>
+  <nav aria-label="Main navigation">
     <a href="/#episodes">Episodes</a>
     <a href="/#media-club">Media Club</a>
     <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
@@ -506,7 +508,7 @@
 </header>
 
 <!-- EPISODE HEADER -->
-<div class="episode-header" id="ep-header">
+<div class="episode-header">
   <div class="episode-eyebrow">Episode</div>
   <div class="episode-num" id="ep-num"></div>
   <h1 class="episode-title" id="ep-title">Loading…</h1>
@@ -622,17 +624,13 @@
 
   async function loadTranscript(ep) {
     const body = document.getElementById('transcript-body');
-    if (!ep.transcript) {
-      body.innerHTML = `<p style="color:var(--mid);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;">Transcript not available for this episode.</p>`;
-      return;
-    }
     try {
-      const proxyUrl = `https://substack-proxy.austinburton.workers.dev/?url=${encodeURIComponent(ep.transcript)}`;
-      const res = await fetch(proxyUrl);
+      const res = await fetch(`../transcripts/${ep.id}.html`);
+      if (!res.ok) throw new Error('not found');
       const html = await res.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      let segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
+      const segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
       if (segments.length === 0) {
         body.innerHTML = `<p>${stripHTML(html).slice(0, 5000)}</p>`;
         return;
@@ -647,16 +645,14 @@
         }
       });
     } catch(e) {
-      body.innerHTML = `<p style="color:var(--mid);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;">
-        Transcript unavailable. <a href="${ep.transcript}" target="_blank" style="color:var(--accent)">View on Buzzsprout →</a>
-      </p>`;
+      body.innerHTML = `<p style="color:var(--mid);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;">Transcript not available for this episode.</p>`;
     }
   }
 
   init();
 </script>
 <!-- MOBILE BOTTOM NAV -->
-<nav class="mobile-nav">
+<nav class="mobile-nav" aria-label="Mobile navigation">
   <a href="/">
     <span class="mobile-nav-icon">←</span>
     All Eps
