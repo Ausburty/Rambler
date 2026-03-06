@@ -5,10 +5,10 @@ def strip(s):
     return re.sub('<[^>]+>', '', s or '').strip()
 
 # Buzzsprout
-tree = ET.parse('feed.xml')
-root = tree.getroot()
+with urllib.request.urlopen('https://feeds.buzzsprout.com/2569924.rss') as r:
+    tree = ET.fromstring(r.read())
 ns = {'itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'}
-items = root.findall('./channel/item')
+items = tree.findall('./channel/item')
 episodes = []
 for i, item in enumerate(items):
     dur = item.find('itunes:duration', ns)
