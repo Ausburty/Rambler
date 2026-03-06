@@ -28,7 +28,7 @@ with open('episodes.json', 'w') as f:
 import urllib.request, xml.etree.ElementTree as ET
 
 req = urllib.request.Request(
-    'https://ramblermediaclub.substack.com/feed',
+    'https://substack-proxy.austinburton.workers.dev/',
     headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'application/rss+xml, application/xml, text/xml, */*',
