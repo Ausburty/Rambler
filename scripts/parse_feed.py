@@ -5,7 +5,8 @@ def strip(s):
     return re.sub('<[^>]+>', '', s or '').strip()
 
 # Buzzsprout
-with urllib.request.urlopen('https://feeds.buzzsprout.com/2569924.rss') as r:
+req = urllib.request.Request('https://feeds.buzzsprout.com/2569924.rss', headers={'User-Agent': 'Mozilla/5.0'})
+with urllib.request.urlopen(req) as r:
     tree = ET.fromstring(r.read())
 ns = {'itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'}
 items = tree.findall('./channel/item')
@@ -24,7 +25,8 @@ with open('episodes.json', 'w') as f:
     json.dump(episodes, f)
 
 # Substack
-with urllib.request.urlopen('https://ramblermediaclub.substack.com/feed') as r:
+req = urllib.request.Request('https://ramblermediaclub.substack.com/feed', headers={'User-Agent': 'Mozilla/5.0'})
+with urllib.request.urlopen(req) as r:
     sub = ET.fromstring(r.read())
 posts = []
 for item in sub.findall('./channel/item')[:5]:
