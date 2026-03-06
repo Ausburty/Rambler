@@ -1,12 +1,1 @@
-[]
-```
-Click **Commit changes**. The GitHub Action will overwrite this with real data when it runs — you just need the file to exist.
-
-Do the same for `posts.json`.
-
----
-
-**Step 2 — Create the scripts folder and Python file**
-Click **Add file → Create new file**. In the filename box type exactly:
-```
-scripts/parse_feed.py
+[{"title": "Media Guide: Hunk Of Junk", "desc": "Oh the places that Tiguan will go.\u2026", "date": "Sun, 08 Feb 2026 20:13:08 GMT", "link": "https://ramblermediaclub.substack.com/p/media-guide-hunk-of-junk"}, {"title": "Media Guide: Snowmageddon", "desc": "Snowstorms, Santa stories, and other things that moved me this week\u2026", "date": "Tue, 03 Feb 2026 19:00:42 GMT", "link": "https://ramblermediaclub.substack.com/p/media-guide-snowmageddon"}]
