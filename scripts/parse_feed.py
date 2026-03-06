@@ -1,4 +1,4 @@
-pythonimport xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET
 import json, urllib.request, re
 
 def strip(s):
