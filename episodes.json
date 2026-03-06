@@ -1,0 +1,13 @@
+
+[]
+```
+Click **Commit changes**. The GitHub Action will overwrite this with real data when it runs — you just need the file to exist.
+
+Do the same for `posts.json`.
+
+---
+
+**Step 2 — Create the scripts folder and Python file**
+Click **Add file → Create new file**. In the filename box type exactly:
+```
+scripts/parse_feed.py
