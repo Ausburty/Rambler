@@ -751,7 +751,7 @@
   document.getElementById('live-date').textContent =
     new Date().toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'});
 
-  function fmtDate(str) {
+function fmtDate(str) {
     try { return new Date(str).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
     catch(e) { return ''; }
   }
@@ -788,7 +788,7 @@
         </div>
         <div class="ep-meta">
           <span style="display:block">${ep.dur}</span>
-          <span>${ep.date}</span>
+          <span>${fmtDate(ep.date)}</span>
         </div>`;
       c.appendChild(a);
     });
