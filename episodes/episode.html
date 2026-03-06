@@ -532,38 +532,26 @@
     catch(e) { return str; }
   }
 
-  function stripHTML(str) {
-    return str.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&nbsp;/g,' ').replace(/&#\d+;/g,'').trim();
-  }
-
-  // Get episode ID from URL query string ?id=XXXXXXXX
   const params = new URLSearchParams(window.location.search);
   const epId = params.get('id');
 
   async function init() {
-    // Load episodes.json
     const res = await fetch('/Rambler/episodes.json');
     const episodes = await res.json();
 
-    // Find this episode
     const ep = episodes.find(e => e.id === epId) || episodes[0];
 
-    // Set page title
     document.title = `Rambler — ${ep.title}`;
-
-    // Populate header
     document.getElementById('ep-num').textContent = `Episode ${String(ep.num).padStart(2,'0')}`;
     document.getElementById('ep-title').textContent = ep.title;
     document.getElementById('ep-date').textContent = fmtDate(ep.date);
     document.getElementById('ep-dur').textContent = ep.dur;
     document.getElementById('ep-desc').textContent = ep.desc.replace('…','');
 
-    // Set audio player
     document.getElementById('audio-src').src = ep.mp3;
     document.getElementById('audio-player').load();
     document.getElementById('mp3-link').href = ep.mp3;
 
-    // Populate sidebar
     const sidebar = document.getElementById('sidebar-episodes');
     sidebar.innerHTML = '';
     episodes.forEach(e => {
@@ -577,43 +565,22 @@
       sidebar.appendChild(a);
     });
 
-    // Load transcript
     loadTranscript(ep);
   }
 
- async function loadTranscript(ep) {
-  const body = document.getElementById('transcript-body');
-  try {
-    const res = await fetch(`/Rambler/transcripts/${ep.id}.html`);
-    const html = await res.text();
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    const segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
-    body.innerHTML = '';
-
-    if (segments.length === 0) {
-      body.innerHTML = `<p>${doc.body.textContent.trim()}</p>`;
-      return;
-    }
-
-    segments.forEach(seg => {
-      const text = seg.textContent.trim();
-      if (text.length > 10) {
-        const p = document.createElement('p');
-        p.textContent = text;
-        body.appendChild(p);
-      }
-    });
-
-  } catch(e) {
-    body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">Transcript unavailable.</p>`;
-  }
-}
-      }
-
+  async function loadTranscript(ep) {
+    const body = document.getElementById('transcript-body');
+    try {
+      const res = await fetch(`/Rambler/transcripts/${ep.id}.html`);
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
       body.innerHTML = '';
+      if (segments.length === 0) {
+        body.innerHTML = `<p>${doc.body.textContent.trim()}</p>`;
+        return;
+      }
       segments.forEach(seg => {
         const text = seg.textContent.trim();
         if (text.length > 10) {
@@ -622,11 +589,8 @@
           body.appendChild(p);
         }
       });
-
     } catch(e) {
-      body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">
-        Transcript unavailable. <a href="${ep.transcript}" target="_blank" style="color:var(--accent)">View on Buzzsprout →</a>
-      </p>`;
+      body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">Transcript unavailable.</p>`;
     }
   }
 
