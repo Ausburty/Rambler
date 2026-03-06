@@ -581,25 +581,36 @@
     loadTranscript(ep);
   }
 
-  async function loadTranscript(ep) {
-    const body = document.getElementById('transcript-body');
-    try {
-      // Try via Cloudflare Worker proxy to avoid CORS
-      const proxyUrl = `https://substack-proxy.austinburton.workers.dev/?url=${encodeURIComponent(ep.transcript)}`;
-      const res = await fetch(proxyUrl);
-      const html = await res.text();
+ async function loadTranscript(ep) {
+  const body = document.getElementById('transcript-body');
+  try {
+    const res = await fetch(`/Rambler/transcripts/${ep.id}.html`);
+    const html = await res.text();
 
-      // Parse the Buzzsprout transcript HTML
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
 
-      // Buzzsprout transcript wraps text in <p> tags inside a .ts-segment or similar
-      // Try multiple selectors
-      let segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
-      if (segments.length === 0) {
-        // Fallback: just grab all text
-        body.innerHTML = `<p>${stripHTML(html).slice(0, 5000)}</p>`;
-        return;
+    const segments = doc.querySelectorAll('.ts-segment p, .transcript p, p');
+    body.innerHTML = '';
+
+    if (segments.length === 0) {
+      body.innerHTML = `<p>${doc.body.textContent.trim()}</p>`;
+      return;
+    }
+
+    segments.forEach(seg => {
+      const text = seg.textContent.trim();
+      if (text.length > 10) {
+        const p = document.createElement('p');
+        p.textContent = text;
+        body.appendChild(p);
+      }
+    });
+
+  } catch(e) {
+    body.innerHTML = `<p style="color:var(--mid); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.1em;">Transcript unavailable.</p>`;
+  }
+}
       }
 
       body.innerHTML = '';
