@@ -109,24 +109,12 @@
   .masthead-right strong { color: var(--ink); font-weight: 400; display: block; }
   .masthead-right a { color: var(--accent); text-decoration: none; font-size: 9px; letter-spacing: 0.2em; }
 
-  /* NAV — mirrors hero's 1fr 1px 1fr grid so column lines align */
+  /* NAV */
   nav {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
     border-top: 1px solid var(--rule);
-  }
-  .nav-left {
     display: flex;
-    align-items: stretch;
     justify-content: center;
-  }
-  .nav-divider {
-    background: var(--rule);
-  }
-  .nav-right {
-    display: flex;
     align-items: stretch;
-    justify-content: center;
   }
   nav a {
     font-family: 'DM Mono', monospace;
@@ -138,16 +126,40 @@
     padding: 13px 22px;
     display: flex;
     align-items: center;
+    border-left: 1px solid var(--rule);
     transition: background 0.2s, color 0.2s;
     white-space: nowrap;
   }
-  .nav-left a { border-right: 1px solid var(--rule); }
-  .nav-left a:first-child { border-left: 1px solid var(--rule); }
-  .nav-right a { border-right: 1px solid var(--rule); }
-  .nav-right a:first-child { border-left: 1px solid var(--rule); }
+  nav a:last-child { border-right: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
   nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
   nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* SECTION RULE BAND */
+  .rule-band {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 40px;
+    height: 32px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .rule-band-line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.25;
+  }
+  .rule-band-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 0 20px;
+    white-space: nowrap;
+  }
 
   /* MOBILE BOTTOM BAR */
   .mobile-nav { display: none; }
@@ -655,19 +667,21 @@
     </div>
   </div>
   <nav>
-    <div class="nav-left">
-      <a href="#episodes">Episodes</a>
-      <a href="#media-club">Media Club</a>
-    </div>
-    <div class="nav-divider"></div>
-    <div class="nav-right">
-      <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
-      <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
-      <a href="https://overcast.fm" target="_blank">Overcast</a>
-      <a href="https://ramblermediaclub.substack.com" target="_blank" class="cta">Subscribe Free →</a>
-    </div>
+    <a href="#episodes">Episodes</a>
+    <a href="#media-club">Media Club</a>
+    <a href="https://podcasts.apple.com/podcast/id1866460662" target="_blank">Apple Podcasts</a>
+    <a href="https://open.spotify.com/show/6rpmEmtDvcMwOu0GgRXmru" target="_blank">Spotify</a>
+    <a href="https://overcast.fm" target="_blank">Overcast</a>
+    <a href="https://ramblermediaclub.substack.com" target="_blank" class="cta">Subscribe Free →</a>
   </nav>
 </header>
+
+<!-- RULE BAND -->
+<div class="rule-band">
+  <div class="rule-band-line"></div>
+  <span class="rule-band-text">✦ The Show ✦</span>
+  <div class="rule-band-line"></div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -689,6 +703,13 @@
     <a href="https://ramblermediaclub.substack.com" class="btn" target="_blank">Read on Substack →</a>
   </div>
 </section>
+
+<!-- RULE BAND -->
+<div class="rule-band">
+  <div class="rule-band-line"></div>
+  <span class="rule-band-text">✦ Listen ✦</span>
+  <div class="rule-band-line"></div>
+</div>
 
 <!-- LISTEN BAR -->
 <div class="listen-bar">
