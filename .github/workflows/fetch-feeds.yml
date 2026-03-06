@@ -1,8 +1,8 @@
 name: Fetch RSS Feeds
 on:
   schedule:
-    - cron: '0 * * * *'  # every hour
-  workflow_dispatch:       # lets you trigger manually too
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   fetch:
@@ -10,10 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Fetch Buzzsprout feed
-        run: |
-          curl -s "https://feeds.buzzsprout.com/2569924.rss" -o feed.xml
-          python3 scripts/parse_feed.py
+      - name: Run feed parser
+        run: python3 scripts/parse_feed.py
 
       - name: Commit JSON files
         run: |
@@ -22,3 +20,4 @@ jobs:
           git add episodes.json posts.json
           git diff --staged --quiet || git commit -m "Update feeds"
           git push
+
