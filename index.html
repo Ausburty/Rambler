@@ -755,100 +755,71 @@
     { title:'Media Guide: Hunk of Junk', desc:'The songs, shows, and rabbit holes behind the car episode — including the Dave Ramsey Facebook ad that started it all.', date:'Feb 8, 2026', link:'https://ramblermediaclub.substack.com' },
   ];
 
-  function renderEpisodes(eps) {
-    const c = document.getElementById('episodes-list');
-    c.innerHTML = '';
-    eps.forEach((ep, i) => {
-      const a = document.createElement('a');
-      a.className = 'episode-item';
-      a.href = ep.link;
-      a.target = '_blank';
-      a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
-      a.innerHTML = `
-        <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
-        <div>
-          <div class="ep-title">${ep.title}</div>
-          <div class="ep-desc">${ep.desc}</div>
-        </div>
-        <div class="ep-meta">
-          <span style="display:block">${ep.dur}</span>
-          <span>${ep.date}</span>
-        </div>`;
-      c.appendChild(a);
-    });
-  }
+function renderEpisodes(eps) {
+  const c = document.getElementById('episodes-list');
+  c.innerHTML = '';
+  eps.forEach((ep, i) => {
+    const a = document.createElement('a');
+    a.className = 'episode-item';
+    a.href = ep.link;
+    a.target = '_blank';
+    a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
+    a.innerHTML = `
+      <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
+      <div>
+        <div class="ep-title">${ep.title}</div>
+        <div class="ep-desc">${ep.desc}</div>
+      </div>
+      <div class="ep-meta">
+        <span style="display:block">${ep.dur}</span>
+        <span>${ep.date}</span>
+      </div>`;
+    c.appendChild(a);
+  });
+}
 
-  function renderSubstack(posts) {
-    const c = document.getElementById('substack-list');
-    c.innerHTML = '';
-    posts.forEach(post => {
-      const a = document.createElement('a');
-      a.className = 'substack-item';
-      a.href = post.link;
-      a.target = '_blank';
-      a.innerHTML = `
-        <div class="substack-title">${post.title}</div>
-        <div class="substack-desc">${post.desc}</div>
-        <div class="substack-date">${post.date}</div>`;
-      c.appendChild(a);
-    });
-  }
+function renderSubstack(posts) {
+  const c = document.getElementById('substack-list');
+  c.innerHTML = '';
+  posts.forEach(post => {
+    const a = document.createElement('a');
+    a.className = 'substack-item';
+    a.href = post.link;
+    a.target = '_blank';
+    a.innerHTML = `
+      <div class="substack-title">${post.title}</div>
+      <div class="substack-desc">${post.desc}</div>
+      <div class="substack-date">${post.date}</div>`;
+    c.appendChild(a);
+  });
+}
 
-  async function fetchXML(url) {
-    const proxies = [
-      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-      `https://corsproxy.io/?${encodeURIComponent(url)}`,
-    ];
-    for (const proxy of proxies) {
-      try {
-        const res = await fetch(proxy, { signal: AbortSignal.timeout(7000) });
-        if (!res.ok) continue;
-        const json = await res.json();
-        const content = json.contents || json.body || '';
-        if (content.includes('<rss') || content.includes('<channel') || content.includes('<feed')) return content;
-      } catch(e) { continue; }
-    }
-    return null;
+async function loadEpisodes() {
+  try {
+    const res = await fetch('/Rambler/episodes.json');
+    const eps = await res.json();
+    document.getElementById('stat-eps').textContent = eps.length;
+    document.getElementById('ep-count-left').textContent = `${eps.length} Episodes`;
+    document.getElementById('ep-count-label').textContent = `${eps.length} episodes · live`;
+    renderEpisodes(eps);
+  } catch(e) {
+    renderEpisodes(FALLBACK_EPISODES);
+    document.getElementById('ep-count-label').textContent = '9 episodes';
   }
+}
 
-  async function loadEpisodes() {
-    const xml = await fetchXML('https://feeds.buzzsprout.com/2569924.rss');
-    if (!xml) { renderEpisodes(FALLBACK_EPISODES); document.getElementById('ep-count-label').textContent = '9 episodes'; return; }
-    try {
-      const doc   = new DOMParser().parseFromString(xml, 'text/xml');
-      const items = Array.from(doc.querySelectorAll('item'));
-      const total = items.length;
-      document.getElementById('stat-eps').textContent = total;
-      document.getElementById('ep-count-left').textContent = `${total} Episodes`;
-      document.getElementById('ep-count-label').textContent = `${total} episodes · live`;
-      renderEpisodes(items.map((item, i) => ({
-        num:  total - i,
-        title: item.querySelector('title')?.textContent?.trim() || '',
-        desc:  stripHTML(item.querySelector('description')?.textContent || '').slice(0,115) + '…',
-        dur:   fmtDur(item.getElementsByTagNameNS('*','duration')[0]?.textContent || ''),
-        date:  fmtDate(item.querySelector('pubDate')?.textContent || ''),
-        link:  item.querySelector('link')?.textContent?.trim() || '#',
-      })));
-    } catch(e) { renderEpisodes(FALLBACK_EPISODES); }
+async function loadSubstack() {
+  try {
+    const res = await fetch('/Rambler/posts.json');
+    const posts = await res.json();
+    renderSubstack(posts);
+  } catch(e) {
+    renderSubstack(FALLBACK_POSTS);
   }
+}
 
-  async function loadSubstack() {
-    const xml = await fetchXML('https://ramblermediaclub.substack.com/feed');
-    if (!xml) { renderSubstack(FALLBACK_POSTS); return; }
-    try {
-      const doc   = new DOMParser().parseFromString(xml, 'text/xml');
-      const items = Array.from(doc.querySelectorAll('item')).slice(0, 5);
-      renderSubstack(items.map(item => ({
-        title: item.querySelector('title')?.textContent?.trim() || '',
-        desc:  stripHTML(item.querySelector('description')?.textContent || '').slice(0,100) + '…',
-        date:  fmtDate(item.querySelector('pubDate')?.textContent || ''),
-        link:  item.querySelector('link')?.textContent?.trim() || '#',
-      })));
-    } catch(e) { renderSubstack(FALLBACK_POSTS); }
-  }
-
-  loadEpisodes();
-  loadSubstack();
+loadEpisodes();
+loadSubstack();
 </script>
 </body>
 </html>
