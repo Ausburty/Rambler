@@ -761,8 +761,7 @@ function renderEpisodes(eps) {
   eps.forEach((ep, i) => {
     const a = document.createElement('a');
     a.className = 'episode-item';
-    a.href = ep.link;
-    a.target = '_blank';
+    a.href = `/Rambler/episodes/episode.html?id=${ep.id}`;
     a.style.cssText = `animation: fadeIn 0.4s ease both ${i * 0.05}s`;
     a.innerHTML = `
       <span class="ep-num">${String(ep.num).padStart(2,'0')}</span>
