@@ -112,9 +112,9 @@
     grid-template-columns: 1fr 1px 1fr;
     border-top: 1px solid var(--rule);
   }
-  .nav-left { display: flex; align-items: stretch; }
+  .nav-left { display: flex; align-items: stretch; justify-content: center; }
   .nav-divider { background: var(--rule); }
-  .nav-right { display: flex; align-items: stretch; justify-content: flex-end; }
+  .nav-right { display: flex; align-items: stretch; justify-content: center; }
   nav a {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -129,10 +129,15 @@
     white-space: nowrap;
   }
   .nav-left a { border-right: 1px solid var(--rule); }
-  .nav-right a { border-left: 1px solid var(--rule); }
+  .nav-left a:first-child { border-left: 1px solid var(--rule); }
+  .nav-right a { border-right: 1px solid var(--rule); }
+  .nav-right a:first-child { border-left: 1px solid var(--rule); }
   nav a:hover { background: var(--ink); color: var(--paper); }
   nav a.cta { background: var(--accent); color: var(--paper); border-color: var(--accent); }
   nav a.cta:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* MOBILE BOTTOM BAR */
+  .mobile-nav { display: none; }
 
   /* MOBILE BOTTOM BAR */
   .mobile-nav { display: none; }
@@ -480,12 +485,12 @@
 
   <div class="masthead-main">
     <div class="masthead-left">
-      <a href="/Rambler/">← All Episodes</a><br>
+      <a href="/">← All Episodes</a><br>
       Rambler · Austin Grey<br>
       Weekly · ~10 min
     </div>
     <div class="masthead-center">
-      <a href="/Rambler/" class="site-title">RAMBLER</a>
+      <a href="/" class="site-title">RAMBLER</a>
       <span class="site-subtitle">Live From the City That Never Works</span>
     </div>
     <div class="masthead-right">
@@ -497,8 +502,8 @@
 
   <nav>
     <div class="nav-left">
-      <a href="/Rambler/#episodes">Episodes</a>
-      <a href="/Rambler/#media-club">Media Club</a>
+      <a href="/#episodes">Episodes</a>
+      <a href="/#media-club">Media Club</a>
     </div>
     <div class="nav-divider"></div>
     <div class="nav-right">
@@ -554,7 +559,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="/Rambler/" class="footer-title">RAMBLER</a>
+  <a href="/" class="footer-title">RAMBLER</a>
   <div class="footer-sub">Live From the City That Never Works</div>
   <div class="footer-links">
     <a href="https://feeds.buzzsprout.com/2569924.rss" target="_blank">RSS</a>
@@ -661,11 +666,11 @@
 </script>
 <!-- MOBILE BOTTOM NAV -->
 <nav class="mobile-nav">
-  <a href="/Rambler/">
+  <a href="/">
     <span class="mobile-nav-icon">←</span>
     All Eps
   </a>
-  <a href="/Rambler/#media-club">
+  <a href="/#media-club">
     <span class="mobile-nav-icon">✦</span>
     Media Club
   </a>
