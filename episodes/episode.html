@@ -536,7 +536,7 @@
   const epId = params.get('id');
 
   async function init() {
-    const res = await fetch('/Rambler/episodes.json');
+    const res = await fetch('/episodes.json');
     const episodes = await res.json();
 
     const ep = episodes.find(e => e.id === epId) || episodes[0];
@@ -557,7 +557,7 @@
     episodes.forEach(e => {
       const a = document.createElement('a');
       a.className = 'sidebar-ep-link' + (e.id === ep.id ? ' active' : '');
-      a.href = `/Rambler/episodes/episode.html?id=${e.id}`;
+      a.href = `/episodes/episode.html?id=${e.id}`;
       a.innerHTML = `
         <div class="sidebar-ep-num">EP ${String(e.num).padStart(2,'0')}</div>
         <div class="sidebar-ep-title">${e.title}</div>
@@ -571,7 +571,7 @@
   async function loadTranscript(ep) {
     const body = document.getElementById('transcript-body');
     try {
-      const res = await fetch(`/Rambler/transcripts/${ep.id}.html`);
+      const res = await fetch(`/transcripts/${ep.id}.html`);
       const html = await res.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
